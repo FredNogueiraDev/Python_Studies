@@ -26,3 +26,11 @@ print('Tempo arredondado:', round(tempo))
 print('2^3:', pow(2, 3))
 
 print(sum([1,2,3,4,5,6,7]))
+
+#---------------------------------------------------------
+import math
+
+print (math.ceil(4.2))
+print (math.floor(4.2))
+print (math.pow(2,3))
+print (math.sqrt(16))
