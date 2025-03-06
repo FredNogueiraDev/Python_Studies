@@ -1,21 +1,19 @@
-def calculadora_ferias(salario_bruto, dias_ferias):
-    valor_diario = salario_bruto / 30
-    ferias_base = valor_diario * dias_ferias
-    adicional_um_terco = ferias_base / 3
-    total_ferias_bruto = ferias_base + adicional_um_terco
+def calcular_decimo_terceiro(salario_bruto, n_meses_trabalhados):
+    salario_anual = (salario_bruto * n_meses_trabalhados) / 12
 
-    inss = calculadora_inss(total_ferias_bruto)
-
-    base_irpf = total_ferias_bruto - inss
+    inss = calculadora_inss(salario_anual)
+    base_irpf = (salario_anual - inss)
     irpf = calculadora_irpf(base_irpf)
+    descontos = (inss + irpf)
 
-    descontos = inss + irpf
-    total_liquido = total_ferias_bruto - descontos
+    primeira_parcela = (salario_anual / 2)
+    segunda_parcela = (primeira_parcela - descontos)
 
-    return (f'Valor férias + 1/3: R${total_ferias_bruto:.2f}\n'
-            f'INSS: R${inss:.2f}\n'
-            f'IRPF: R${irpf:.2f}\n'
-            f'Total líquido: R${total_liquido:.2f}')
+    total = (primeira_parcela + segunda_parcela)
+
+    return (f'Vr. primeira parcela: R${primeira_parcela:.2f}\n'
+            f'Vr. segunda parcela: R${segunda_parcela:.2f}\n'
+            f'Total: R${total:.2f}')
 
 def calculadora_inss(base_inss):
     TETO_INSS = 908.85
@@ -59,10 +57,9 @@ def calculadora_irpf(base_irpf):
 if __name__ == "__main__":
     try:
         salario = float(input('Salário bruto: R$'))
-        dias = int(input('Dias de férias: '))
-        if salario < 0 or dias < 0:
-            raise ValueError("Valores não podem ser negativos")
-        resultado = calculadora_ferias(salario, dias)
+        meses = int(input('N° meses trabalhados: '))
+
+        resultado = calcular_decimo_terceiro(salario, meses)
         print(resultado)
     except ValueError as e:
         print(f"Erro: {e}")

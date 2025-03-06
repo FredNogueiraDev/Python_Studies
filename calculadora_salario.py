@@ -29,7 +29,7 @@ def calcular_salario_liquido(salario, horas_semanais, he_dias_comuns, he_dias_fe
             f'IRPF: R${irpf:.2f}\n'
             f'Salário líquido: R${salario_liquido:.2f}')
 
-def calculadora_inss(total_ferias_bruto):
+def calculadora_inss(base_inss):
     TETO_INSS = 908.85
     FAIXAS_INSS = [
         (1412.00, 0.075),
@@ -39,7 +39,7 @@ def calculadora_inss(total_ferias_bruto):
     ]
 
     inss = 0
-    valor_restante = total_ferias_bruto
+    valor_restante = base_inss
     for limite, aliquota in FAIXAS_INSS:
         if valor_restante <= 0:
             break
